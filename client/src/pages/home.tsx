@@ -1,10 +1,12 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Badge } from "@/components/ui/badge";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { useToast } from "@/hooks/use-toast";
 import { 
   DollarSign, 
   Clock, 
@@ -19,7 +21,11 @@ import {
   Zap,
   Search,
   CreditCard,
-  Users
+  Users,
+  Lock,
+  Info,
+  Copy,
+  Check
 } from "lucide-react";
 
 type ScenarioMode = "quick" | "deep";
@@ -41,6 +47,44 @@ interface Calculations {
   isApproved: boolean;
 }
 
+interface StoredState {
+  scenarioMode: ScenarioMode;
+  minimumFloor: number;
+  inputs: DealInputs;
+}
+
+const STORAGE_KEY = "deal-margin-simulator-state";
+
+const defaultInputs: DealInputs = {
+  dealAmount: 5000,
+  estimatedHours: 10,
+  revisions: 0,
+  expenses: 0,
+  taxRate: 30,
+  softwareCosts: 0,
+  agencyFees: 0,
+};
+
+function loadStoredState(): StoredState | null {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      return JSON.parse(stored);
+    }
+  } catch (e) {
+    console.error("Failed to load stored state:", e);
+  }
+  return null;
+}
+
+function saveState(state: StoredState): void {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (e) {
+    console.error("Failed to save state:", e);
+  }
+}
+
 function formatCurrency(value: number): string {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -59,18 +103,37 @@ function formatCurrencyWithCents(value: number): string {
   }).format(value);
 }
 
+function InfoTooltip({ content }: { content: string }) {
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <button 
+          type="button" 
+          className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-slate-200 text-slate-500 hover:bg-slate-300 transition-colors"
+          data-testid="button-info-tooltip"
+        >
+          <Info className="w-3 h-3" />
+        </button>
+      </TooltipTrigger>
+      <TooltipContent side="top" className="max-w-xs text-sm">
+        {content}
+      </TooltipContent>
+    </Tooltip>
+  );
+}
+
 export default function Home() {
-  const [scenarioMode, setScenarioMode] = useState<ScenarioMode>("quick");
-  const [minimumFloor, setMinimumFloor] = useState(100);
-  const [inputs, setInputs] = useState<DealInputs>({
-    dealAmount: 5000,
-    estimatedHours: 10,
-    revisions: 0,
-    expenses: 0,
-    taxRate: 30,
-    softwareCosts: 0,
-    agencyFees: 0,
-  });
+  const { toast } = useToast();
+  const [copied, setCopied] = useState(false);
+  
+  const storedState = loadStoredState();
+  const [scenarioMode, setScenarioMode] = useState<ScenarioMode>(storedState?.scenarioMode || "quick");
+  const [minimumFloor, setMinimumFloor] = useState(storedState?.minimumFloor || 100);
+  const [inputs, setInputs] = useState<DealInputs>(storedState?.inputs || defaultInputs);
+
+  useEffect(() => {
+    saveState({ scenarioMode, minimumFloor, inputs });
+  }, [scenarioMode, minimumFloor, inputs]);
 
   const calculations = useMemo<Calculations>(() => {
     const totalExpenses = inputs.expenses + 
@@ -100,14 +163,53 @@ export default function Home() {
     }
   };
 
+  const handleCopySummary = async () => {
+    const verdict = calculations.isApproved ? "GREEN LIGHT: Good Deal" : "RED FLAG: Negotiate Higher";
+    const summary = `Deal Summary
+─────────────────
+Gross Deal: ${formatCurrency(inputs.dealAmount)}
+Net Revenue: ${formatCurrency(calculations.netRevenue)}
+Total Hours: ${calculations.totalHours}h
+Effective Rate: ${formatCurrencyWithCents(calculations.effectiveRate)}/hr
+Your Floor: ${formatCurrency(minimumFloor)}/hr
+
+Verdict: ${verdict}
+
+─────────────────
+Calculated with Deal Margin Simulator
+creatoraiplaybook.co`;
+
+    try {
+      await navigator.clipboard.writeText(summary);
+      setCopied(true);
+      toast({
+        title: "Copied!",
+        description: "Deal summary copied to clipboard",
+      });
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      toast({
+        title: "Failed to copy",
+        description: "Please try again",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
       <header className="w-full border-b border-slate-200 bg-white/80 backdrop-blur-sm sticky top-0 z-50">
-        <div className="max-w-2xl mx-auto px-4 py-4 flex items-center gap-3">
-          <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-blue-600 text-white">
-            <Calculator className="w-5 h-5" />
+        <div className="max-w-2xl mx-auto px-4 pt-3 pb-4">
+          <div className="flex items-center justify-center gap-1.5 mb-3">
+            <Lock className="w-3 h-3 text-slate-400" />
+            <span className="text-xs text-slate-400" data-testid="text-privacy-notice">
+              100% Private - Stored Only on Your Device
+            </span>
           </div>
-          <div>
+          <div className="flex flex-col items-center text-center">
+            <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-blue-600 text-white mb-2">
+              <Calculator className="w-5 h-5" />
+            </div>
             <h1 className="text-lg font-bold text-slate-900" data-testid="text-app-title">
               Deal Margin Simulator
             </h1>
@@ -116,7 +218,7 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="flex-1 w-full max-w-2xl mx-auto px-4 py-6 pb-48 md:pb-52">
+      <main className="flex-1 w-full max-w-2xl mx-auto px-4 py-6 pb-80 md:pb-72">
         <div className="mb-6 flex justify-center">
           <div className="inline-flex items-center bg-white rounded-lg p-1 border border-slate-200 shadow-sm">
             <button
@@ -161,6 +263,7 @@ export default function Home() {
                   <Label htmlFor="dealAmount" className="text-sm font-medium text-slate-700 flex items-center gap-2">
                     <DollarSign className="w-4 h-4 text-slate-400" />
                     Deal Amount
+                    <InfoTooltip content="The total amount the brand is paying you for this sponsorship deal before any deductions." />
                   </Label>
                   <div className="relative">
                     <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-medium">$</span>
@@ -181,6 +284,7 @@ export default function Home() {
                     <Label htmlFor="estimatedHours" className="text-sm font-medium text-slate-700 flex items-center gap-2">
                       <Clock className="w-4 h-4 text-slate-400" />
                       Estimated Hours
+                      <InfoTooltip content="Total time you'll spend on this deal including filming, editing, communication, and admin work." />
                     </Label>
                     <Input
                       id="estimatedHours"
@@ -198,6 +302,7 @@ export default function Home() {
                     <Label htmlFor="revisions" className="text-sm font-medium text-slate-700 flex items-center gap-2">
                       <RefreshCw className="w-4 h-4 text-slate-400" />
                       Revisions
+                      <InfoTooltip content="Number of revision rounds the brand may request. Each revision typically adds about 2 hours of work." />
                     </Label>
                     <Input
                       id="revisions"
@@ -318,7 +423,7 @@ export default function Home() {
               </div>
 
               <div className="space-y-4">
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between flex-wrap gap-2">
                   <Label className="text-sm font-medium text-slate-700">
                     Minimum Hourly Floor
                   </Label>
@@ -373,11 +478,14 @@ export default function Home() {
                     }
                   </div>
                   <div>
-                    <p className={`text-xs font-medium uppercase tracking-wide ${
-                      calculations.isApproved ? "text-emerald-600" : "text-red-600"
-                    }`}>
-                      Effective Hourly Rate
-                    </p>
+                    <div className="flex items-center gap-2">
+                      <p className={`text-xs font-medium uppercase tracking-wide ${
+                        calculations.isApproved ? "text-emerald-600" : "text-red-600"
+                      }`}>
+                        Effective Hourly Rate
+                      </p>
+                      <InfoTooltip content="Your true earnings per hour after deducting taxes and expenses from the deal amount." />
+                    </div>
                     <p className={`text-3xl md:text-4xl font-bold ${
                       calculations.isApproved ? "text-emerald-700" : "text-red-700"
                     }`} data-testid="text-effective-rate">
@@ -388,16 +496,27 @@ export default function Home() {
                 </div>
 
                 <div className="flex flex-col gap-3">
-                  <Badge 
-                    className={`justify-center py-1.5 px-4 text-sm font-semibold ${
-                      calculations.isApproved 
-                        ? "bg-emerald-600 text-white hover:bg-emerald-700" 
-                        : "bg-red-600 text-white hover:bg-red-700"
-                    }`}
-                    data-testid="badge-deal-status"
-                  >
-                    {calculations.isApproved ? "DEAL APPROVED" : "REJECT DEAL"}
-                  </Badge>
+                  <div className="flex items-center gap-2">
+                    <Badge 
+                      className={`flex-1 justify-center py-1.5 px-4 text-sm font-semibold ${
+                        calculations.isApproved 
+                          ? "bg-emerald-600 text-white hover:bg-emerald-700" 
+                          : "bg-red-600 text-white hover:bg-red-700"
+                      }`}
+                      data-testid="badge-deal-status"
+                    >
+                      {calculations.isApproved ? "GREEN LIGHT: Good Deal" : "RED FLAG: Negotiate Higher"}
+                    </Badge>
+                    <Button
+                      size="icon"
+                      variant="outline"
+                      onClick={handleCopySummary}
+                      className="shrink-0"
+                      data-testid="button-copy-summary"
+                    >
+                      {copied ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4" />}
+                    </Button>
+                  </div>
                   <Button 
                     className="bg-blue-600 hover:bg-blue-700 text-white gap-2"
                     data-testid="button-lock-deal"
@@ -434,13 +553,32 @@ export default function Home() {
             </div>
           </Card>
         </div>
+        
+        <div className="text-center py-3 bg-slate-50">
+          <p className="text-xs text-slate-400 px-4" data-testid="text-footer">
+            This calculator provides estimates for informational purposes only. Built by{" "}
+            <a 
+              href="https://creatoraiplaybook.co" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="underline hover:text-slate-600 transition-colors"
+              data-testid="link-playbook-media"
+            >
+              Playbook Media
+            </a>
+            . Get the full system at{" "}
+            <a 
+              href="https://creatoraiplaybook.co" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="underline hover:text-slate-600 transition-colors"
+              data-testid="link-creator-playbook"
+            >
+              creatoraiplaybook.co
+            </a>
+          </p>
+        </div>
       </div>
-
-      <footer className="fixed bottom-0 left-0 right-0 -z-10 pb-2 text-center">
-        <p className="text-xs text-slate-400" data-testid="text-footer">
-          Built by Playbook Media
-        </p>
-      </footer>
     </div>
   );
 }
