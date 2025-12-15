@@ -1,0 +1,83 @@
+Goal: Build a single-page React application called "The Deal Margin Simulator." This is a financial calculator for solopreneurs to determine if a fixed-price sponsorship deal is actually profitable after taxes, expenses, and time are factored in.
+
+Tech Stack:
+
+React (Vite)
+
+Tailwind CSS
+
+Lucide React (Icons)
+
+Important: Use npm run build compatible code (ES Modules).
+
+Design System (Mandatory):
+
+Aesthetic: "Clean FinTech." Minimalist, trustworthy, high whitespace.
+
+Background: bg-slate-50 (Soft Gray). NEVER pure white or dark mode.
+
+Cards: bg-white, rounded-xl, shadow-sm, border border-slate-200.
+
+Primary Action Color: bg-blue-600 (Hover: bg-blue-700).
+
+Text: Headers: text-slate-900, font-bold. Body: text-slate-600. Muted: text-slate-400.
+
+Font: System Sans-Serif (Inter style).
+
+Inputs: rounded-lg, border-slate-300, focus:ring-blue-500.
+
+Core Logic (The Math):
+
+Inputs (Card 1 - "The Deal"):
+
+Deal Amount ($)
+
+Estimated Hours (Filming, Editing, Admin)
+
+Number of Revisions (Default: 0) -> Logic: Each revision adds 2 hours.
+
+Expenses (Software, Contractors, Props) ($)
+
+Tax Rate (%) (Default to 30%)
+
+Input (Card 2 - "Your Standards"):
+
+"Minimum Hourly Floor" (Slider or Input). Default: $100/hr.
+
+Calculations:
+
+Net Revenue = Deal Amount - Expenses - (Deal Amount * (Tax Rate/100))
+
+Total Hours = Estimated Hours + (Revisions * 2)
+
+Effective Hourly Rate = Net Revenue / Total Hours
+
+The Result (Card 3):
+
+Display the Effective Hourly Rate big and bold.
+
+Conditional Logic:
+
+IF Effective Rate >= Minimum Floor: Show GREEN Card. Text: "DEAL APPROVED."
+
+IF Effective Rate < Minimum Floor: Show RED Card. Text: "REJECT DEAL" (or "Negotiate Higher").
+
+Layout Structure:
+
+Header: Simple logo/title top left ("Deal Margin Simulator").
+
+Main Content: Centered single column (max-w-2xl).
+
+Top Section: The Input Cards.
+
+Bottom Sticky (or Fixed) Section: The Result Card (Update in real-time).
+
+Footer: "Built by Playbook Media."
+
+Specific Features:
+
+Add a "Scenario Toggle" at the top: "Quick Check" vs "Deep Dive" (Deep dive reveals hidden fields like 'Software Subscription costs' or 'Agency Fees', but start with Quick Check visible).
+
+The "Action" Button: In the Result Card, add a button that says "Lock in this deal with a contract" (Link placeholder: #).
+
+Execution: Scaffold the app, creating the components for DealInputs, RateStandards, and ResultCard. Ensure the layout is mobile-responsive (stack columns on mobile).
