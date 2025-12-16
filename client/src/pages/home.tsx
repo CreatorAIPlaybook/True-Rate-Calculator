@@ -452,6 +452,35 @@ creatoraiplaybook.co`;
               </div>
             </div>
           </Card>
+
+          {/* FOOTER TEXT - PLACED BELOW THE CARD */}
+          <div className="px-4 text-center space-y-3 pb-8">
+            <p className="text-xs text-slate-400 leading-relaxed" data-testid="text-disclaimer">
+              This calculator provides estimates for informational purposes only and should not be considered financial or tax advice. Consult a qualified professional for your specific situation.
+            </p>
+            <p className="text-sm text-slate-400" data-testid="text-footer">
+              Built by{" "}
+              <a 
+                href="https://creatoraiplaybook.co" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-slate-500 hover:text-slate-700 transition-colors font-medium"
+                data-testid="link-playbook-media"
+              >
+                Playbook Media
+              </a>
+              . Get the full system at{" "}
+              <a 
+                href="https://creatoraiplaybook.co" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-slate-500 hover:text-slate-700 transition-colors font-medium"
+                data-testid="link-creator-playbook"
+              >
+                creatoraiplaybook.co
+              </a>
+            </p>
+          </div>
         </div>
       </main>
 
