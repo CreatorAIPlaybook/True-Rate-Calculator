@@ -214,7 +214,7 @@ creatoraiplaybook.co`;
         </div>
       </header>
 
-      <main className="flex-1 w-full max-w-2xl mx-auto px-4 py-6 pb-96 md:pb-80">
+      <main className="flex-1 w-full max-w-2xl mx-auto px-4 py-6 pb-40">
         <div className="mb-6 flex justify-center">
           <div className="inline-flex items-center bg-white rounded-lg p-1 border border-slate-200 shadow-sm">
             <button
@@ -553,35 +553,35 @@ creatoraiplaybook.co`;
             </div>
           </Card>
         </div>
-        
-        <div className="text-center py-3 bg-slate-100 space-y-2">
-          <p className="text-xs text-slate-400 px-4 max-w-xl mx-auto" data-testid="text-disclaimer">
-            This calculator provides estimates for informational purposes only and should not be considered financial or tax advice. Consult a qualified professional for your specific situation.
-          </p>
-          <p className="text-sm text-slate-400 px-4" data-testid="text-footer">
-            Built by{" "}
-            <a 
-              href="https://creatoraiplaybook.co" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-slate-500 hover:text-slate-700 transition-colors"
-              data-testid="link-playbook-media"
-            >
-              Playbook Media
-            </a>
-            . Get the full system at{" "}
-            <a 
-              href="https://creatoraiplaybook.co" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-slate-500 hover:text-slate-700 transition-colors"
-              data-testid="link-creator-playbook"
-            >
-              creatoraiplaybook.co
-            </a>
-          </p>
-        </div>
       </div>
+
+      <footer className="w-full text-center py-4 bg-slate-100 space-y-2">
+        <p className="text-xs text-slate-400 px-4 max-w-xl mx-auto" data-testid="text-disclaimer">
+          This calculator provides estimates for informational purposes only and should not be considered financial or tax advice. Consult a qualified professional for your specific situation.
+        </p>
+        <p className="text-sm text-slate-400 px-4" data-testid="text-footer">
+          Built by{" "}
+          <a 
+            href="https://creatoraiplaybook.co" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-slate-500 hover:text-slate-700 transition-colors"
+            data-testid="link-playbook-media"
+          >
+            Playbook Media
+          </a>
+          . Get the full system at{" "}
+          <a 
+            href="https://creatoraiplaybook.co" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-slate-500 hover:text-slate-700 transition-colors"
+            data-testid="link-creator-playbook"
+          >
+            creatoraiplaybook.co
+          </a>
+        </p>
+      </footer>
     </div>
   );
 }
