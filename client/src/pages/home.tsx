@@ -214,7 +214,7 @@ creatoraiplaybook.co`;
         </div>
       </header>
 
-      <main className="flex-1 w-full max-w-2xl mx-auto px-4 py-6 pb-80 md:pb-72">
+      <main className="flex-1 w-full max-w-2xl mx-auto px-4 py-6 pb-96 md:pb-80">
         <div className="mb-6 flex justify-center">
           <div className="inline-flex items-center bg-white rounded-lg p-1 border border-slate-200 shadow-sm">
             <button
