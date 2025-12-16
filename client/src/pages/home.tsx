@@ -17,7 +17,6 @@ import {
   CheckCircle2,
   XCircle,
   ArrowRight,
-  Calculator,
   Zap,
   Search,
   CreditCard,
@@ -53,7 +52,7 @@ interface StoredState {
   inputs: DealInputs;
 }
 
-const STORAGE_KEY = "deal-margin-simulator-state";
+const STORAGE_KEY = "true-rate-calculator-state";
 
 const defaultInputs: DealInputs = {
   dealAmount: 5000,
@@ -176,7 +175,7 @@ Your Floor: ${formatCurrency(minimumFloor)}/hr
 Verdict: ${verdict}
 
 ─────────────────
-Calculated with Deal Margin Simulator
+Calculated with True Rate Calculator
 creatoraiplaybook.co`;
 
     try {
@@ -197,23 +196,20 @@ creatoraiplaybook.co`;
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col">
-      <header className="w-full border-b border-slate-200 bg-white/80 backdrop-blur-sm sticky top-0 z-50">
-        <div className="max-w-2xl mx-auto px-4 pt-3 pb-4">
-          <div className="flex items-center justify-center gap-1.5 mb-3">
-            <Lock className="w-3 h-3 text-slate-400" />
-            <span className="text-xs text-slate-400" data-testid="text-privacy-notice">
+    <div className="min-h-screen bg-slate-100 flex flex-col">
+      <header className="w-full bg-slate-100 pt-6 pb-4">
+        <div className="max-w-2xl mx-auto px-4">
+          <div className="flex items-center justify-center gap-1.5 mb-4">
+            <Lock className="w-3.5 h-3.5 text-slate-400" />
+            <span className="text-sm text-slate-400" data-testid="text-privacy-notice">
               100% Private - Stored Only on Your Device
             </span>
           </div>
           <div className="flex flex-col items-center text-center">
-            <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-blue-600 text-white mb-2">
-              <Calculator className="w-5 h-5" />
-            </div>
-            <h1 className="text-lg font-bold text-slate-900" data-testid="text-app-title">
-              Deal Margin Simulator
+            <h1 className="text-2xl md:text-3xl font-bold text-slate-900 mb-2" data-testid="text-app-title">
+              True Rate Calculator
             </h1>
-            <p className="text-xs text-slate-500">Know your true hourly rate</p>
+            <p className="text-sm text-slate-500">Calculate your effective hourly rate on sponsorship deals</p>
           </div>
         </div>
       </header>
@@ -225,7 +221,7 @@ creatoraiplaybook.co`;
               onClick={() => handleModeChange("quick")}
               className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
                 scenarioMode === "quick"
-                  ? "bg-blue-600 text-white shadow-sm"
+                  ? "bg-slate-800 text-white shadow-sm"
                   : "text-slate-600 hover:text-slate-900"
               }`}
               data-testid="button-quick-check"
@@ -237,7 +233,7 @@ creatoraiplaybook.co`;
               onClick={() => handleModeChange("deep")}
               className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
                 scenarioMode === "deep"
-                  ? "bg-blue-600 text-white shadow-sm"
+                  ? "bg-slate-800 text-white shadow-sm"
                   : "text-slate-600 hover:text-slate-900"
               }`}
               data-testid="button-deep-dive"
@@ -252,7 +248,7 @@ creatoraiplaybook.co`;
           <Card className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-visible">
             <div className="p-6">
               <div className="flex items-center gap-2 mb-6">
-                <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-100 text-blue-600">
+                <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100 text-slate-600">
                   <Receipt className="w-4 h-4" />
                 </div>
                 <h2 className="text-lg font-bold text-slate-900">The Deal</h2>
@@ -272,7 +268,7 @@ creatoraiplaybook.co`;
                       type="number"
                       value={inputs.dealAmount || ""}
                       onChange={handleInputChange("dealAmount")}
-                      className="pl-8 h-11 rounded-lg border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="pl-8 h-11 rounded-lg border-slate-300 focus:ring-2 focus:ring-slate-500 focus:border-slate-500 bg-slate-50"
                       placeholder="5000"
                       data-testid="input-deal-amount"
                     />
@@ -291,7 +287,7 @@ creatoraiplaybook.co`;
                       type="number"
                       value={inputs.estimatedHours || ""}
                       onChange={handleInputChange("estimatedHours")}
-                      className="h-11 rounded-lg border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="h-11 rounded-lg border-slate-300 focus:ring-2 focus:ring-slate-500 focus:border-slate-500 bg-slate-50"
                       placeholder="10"
                       data-testid="input-estimated-hours"
                     />
@@ -309,7 +305,7 @@ creatoraiplaybook.co`;
                       type="number"
                       value={inputs.revisions || ""}
                       onChange={handleInputChange("revisions")}
-                      className="h-11 rounded-lg border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="h-11 rounded-lg border-slate-300 focus:ring-2 focus:ring-slate-500 focus:border-slate-500 bg-slate-50"
                       placeholder="0"
                       min="0"
                       data-testid="input-revisions"
@@ -323,6 +319,7 @@ creatoraiplaybook.co`;
                     <Label htmlFor="expenses" className="text-sm font-medium text-slate-700 flex items-center gap-2">
                       <CreditCard className="w-4 h-4 text-slate-400" />
                       Expenses
+                      <InfoTooltip content="One-off costs for this specific project (e.g., stock photos, contractor fees, specific fonts)." />
                     </Label>
                     <div className="relative">
                       <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-medium">$</span>
@@ -331,7 +328,7 @@ creatoraiplaybook.co`;
                         type="number"
                         value={inputs.expenses || ""}
                         onChange={handleInputChange("expenses")}
-                        className="pl-8 h-11 rounded-lg border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        className="pl-8 h-11 rounded-lg border-slate-300 focus:ring-2 focus:ring-slate-500 focus:border-slate-500 bg-slate-50"
                         placeholder="0"
                         data-testid="input-expenses"
                       />
@@ -343,6 +340,7 @@ creatoraiplaybook.co`;
                     <Label htmlFor="taxRate" className="text-sm font-medium text-slate-700 flex items-center gap-2">
                       <Percent className="w-4 h-4 text-slate-400" />
                       Tax Rate
+                      <InfoTooltip content="The percentage set aside for taxes. A safe bet for freelancers is usually 25-30%." />
                     </Label>
                     <div className="relative">
                       <Input
@@ -350,7 +348,7 @@ creatoraiplaybook.co`;
                         type="number"
                         value={inputs.taxRate || ""}
                         onChange={handleInputChange("taxRate")}
-                        className="pr-8 h-11 rounded-lg border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        className="pr-8 h-11 rounded-lg border-slate-300 focus:ring-2 focus:ring-slate-500 focus:border-slate-500 bg-slate-50"
                         placeholder="30"
                         min="0"
                         max="100"
@@ -364,15 +362,16 @@ creatoraiplaybook.co`;
                 {scenarioMode === "deep" && (
                   <div className="pt-4 border-t border-slate-100">
                     <div className="flex items-center gap-2 mb-4">
-                      <Badge variant="secondary" className="text-xs bg-slate-100 text-slate-600">
+                      <Badge variant="secondary" className="text-xs bg-slate-100 text-slate-600 no-default-hover-elevate no-default-active-elevate cursor-default">
                         Deep Dive
                       </Badge>
                       <span className="text-xs text-slate-400">Additional costs</span>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="softwareCosts" className="text-sm font-medium text-slate-700">
-                          Software Subscriptions
+                        <Label htmlFor="softwareCosts" className="text-sm font-medium text-slate-700 flex items-center gap-2">
+                          Software Subs
+                          <InfoTooltip content="Monthly tools you pay for to do the work (Adobe, ChatGPT, Hosting, etc.)." />
                         </Label>
                         <div className="relative">
                           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-medium">$</span>
@@ -381,7 +380,7 @@ creatoraiplaybook.co`;
                             type="number"
                             value={inputs.softwareCosts || ""}
                             onChange={handleInputChange("softwareCosts")}
-                            className="pl-8 h-11 rounded-lg border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            className="pl-8 h-11 rounded-lg border-slate-300 focus:ring-2 focus:ring-slate-500 focus:border-slate-500 bg-slate-50"
                             placeholder="0"
                             data-testid="input-software-costs"
                           />
@@ -392,6 +391,7 @@ creatoraiplaybook.co`;
                         <Label htmlFor="agencyFees" className="text-sm font-medium text-slate-700 flex items-center gap-2">
                           <Users className="w-4 h-4 text-slate-400" />
                           Agency Fees
+                          <InfoTooltip content="Fees taken by platforms (Upwork/Fiverr) or commissions paid to an agent." />
                         </Label>
                         <div className="relative">
                           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-medium">$</span>
@@ -400,7 +400,7 @@ creatoraiplaybook.co`;
                             type="number"
                             value={inputs.agencyFees || ""}
                             onChange={handleInputChange("agencyFees")}
-                            className="pl-8 h-11 rounded-lg border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            className="pl-8 h-11 rounded-lg border-slate-300 focus:ring-2 focus:ring-slate-500 focus:border-slate-500 bg-slate-50"
                             placeholder="0"
                             data-testid="input-agency-fees"
                           />
@@ -416,7 +416,7 @@ creatoraiplaybook.co`;
           <Card className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-visible">
             <div className="p-6">
               <div className="flex items-center gap-2 mb-6">
-                <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-amber-100 text-amber-600">
+                <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100 text-slate-600">
                   <Target className="w-4 h-4" />
                 </div>
                 <h2 className="text-lg font-bold text-slate-900">Your Standards</h2>
@@ -497,16 +497,16 @@ creatoraiplaybook.co`;
 
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center gap-2">
-                    <Badge 
-                      className={`flex-1 justify-center py-1.5 px-4 text-sm font-semibold ${
+                    <span 
+                      className={`flex-1 inline-flex justify-center py-1.5 px-4 text-sm font-semibold rounded-md cursor-default select-none ${
                         calculations.isApproved 
-                          ? "bg-emerald-600 text-white hover:bg-emerald-700" 
-                          : "bg-red-600 text-white hover:bg-red-700"
+                          ? "bg-emerald-600 text-white" 
+                          : "bg-red-600 text-white"
                       }`}
                       data-testid="badge-deal-status"
                     >
                       {calculations.isApproved ? "GREEN LIGHT: Good Deal" : "RED FLAG: Negotiate Higher"}
-                    </Badge>
+                    </span>
                     <Button
                       size="icon"
                       variant="outline"
@@ -518,7 +518,7 @@ creatoraiplaybook.co`;
                     </Button>
                   </div>
                   <Button 
-                    className="bg-blue-600 hover:bg-blue-700 text-white gap-2"
+                    className="bg-slate-800 hover:bg-slate-900 text-white gap-2"
                     data-testid="button-lock-deal"
                     asChild
                   >
@@ -554,14 +554,14 @@ creatoraiplaybook.co`;
           </Card>
         </div>
         
-        <div className="text-center py-3 bg-slate-50">
-          <p className="text-xs text-slate-400 px-4" data-testid="text-footer">
-            This calculator provides estimates for informational purposes only. Built by{" "}
+        <div className="text-center py-3 bg-slate-100">
+          <p className="text-sm text-slate-400 px-4" data-testid="text-footer">
+            Built by{" "}
             <a 
               href="https://creatoraiplaybook.co" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="underline hover:text-slate-600 transition-colors"
+              className="text-slate-500 hover:text-slate-700 transition-colors"
               data-testid="link-playbook-media"
             >
               Playbook Media
@@ -571,7 +571,7 @@ creatoraiplaybook.co`;
               href="https://creatoraiplaybook.co" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="underline hover:text-slate-600 transition-colors"
+              className="text-slate-500 hover:text-slate-700 transition-colors"
               data-testid="link-creator-playbook"
             >
               creatoraiplaybook.co

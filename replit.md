@@ -1,8 +1,16 @@
-# Deal Margin Simulator
+# True Rate Calculator
 
 ## Overview
 
 A single-page React application designed for solopreneurs to calculate whether fixed-price sponsorship deals are actually profitable. The app functions as a financial calculator that factors in taxes, expenses, time investment, and revisions to determine effective hourly rates and deal viability.
+
+## Recent Changes
+- Renamed app from "Deal Margin Simulator" to "True Rate Calculator"
+- Header is now non-sticky (scrolls with page) for more screen space
+- Styling updated to match Tax Shield brand (slate-100 background, slate-800 buttons)
+- Added tooltips to all financial inputs (Expenses, Tax Rate, Software Subs, Agency Fees)
+- Result badges (GREEN LIGHT/RED FLAG) no longer have hover effects
+- localStorage key updated to "true-rate-calculator-state"
 
 ## User Preferences
 
