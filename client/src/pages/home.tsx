@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Badge } from "@/components/ui/badge";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useToast } from "@/hooks/use-toast";
 import { 
   DollarSign, 
@@ -104,8 +104,8 @@ function formatCurrencyWithCents(value: number): string {
 
 function InfoTooltip({ content }: { content: string }) {
   return (
-    <Tooltip>
-      <TooltipTrigger asChild>
+    <Popover>
+      <PopoverTrigger asChild>
         <button 
           type="button" 
           className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-slate-200 text-slate-500 hover:bg-slate-300 transition-colors"
@@ -113,11 +113,11 @@ function InfoTooltip({ content }: { content: string }) {
         >
           <Info className="w-3 h-3" />
         </button>
-      </TooltipTrigger>
-      <TooltipContent side="top" className="max-w-xs text-sm">
+      </PopoverTrigger>
+      <PopoverContent side="top" className="max-w-xs text-sm p-3">
         {content}
-      </TooltipContent>
-    </Tooltip>
+      </PopoverContent>
+    </Popover>
   );
 }
 
@@ -269,7 +269,7 @@ creatoraiplaybook.co`;
                       value={inputs.dealAmount || ""}
                       onChange={handleInputChange("dealAmount")}
                       className="pl-8 h-11 rounded-lg border-slate-300 focus:ring-2 focus:ring-slate-500 focus:border-slate-500 bg-slate-50"
-                      placeholder="5000"
+                      placeholder="0"
                       data-testid="input-deal-amount"
                     />
                   </div>
@@ -288,7 +288,7 @@ creatoraiplaybook.co`;
                       value={inputs.estimatedHours || ""}
                       onChange={handleInputChange("estimatedHours")}
                       className="h-11 rounded-lg border-slate-300 focus:ring-2 focus:ring-slate-500 focus:border-slate-500 bg-slate-50"
-                      placeholder="10"
+                      placeholder="0"
                       data-testid="input-estimated-hours"
                     />
                     <p className="text-xs text-slate-400">Filming, editing, admin</p>
@@ -349,7 +349,7 @@ creatoraiplaybook.co`;
                         value={inputs.taxRate || ""}
                         onChange={handleInputChange("taxRate")}
                         className="pr-8 h-11 rounded-lg border-slate-300 focus:ring-2 focus:ring-slate-500 focus:border-slate-500 bg-slate-50"
-                        placeholder="30"
+                        placeholder="0"
                         min="0"
                         max="100"
                         data-testid="input-tax-rate"
@@ -554,7 +554,10 @@ creatoraiplaybook.co`;
           </Card>
         </div>
         
-        <div className="text-center py-3 bg-slate-100">
+        <div className="text-center py-3 bg-slate-100 space-y-2">
+          <p className="text-xs text-slate-400 px-4 max-w-xl mx-auto" data-testid="text-disclaimer">
+            This calculator provides estimates for informational purposes only and should not be considered financial or tax advice. Consult a qualified professional for your specific situation.
+          </p>
           <p className="text-sm text-slate-400 px-4" data-testid="text-footer">
             Built by{" "}
             <a 

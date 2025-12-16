@@ -11,6 +11,10 @@ A single-page React application designed for solopreneurs to calculate whether f
 - Added tooltips to all financial inputs (Expenses, Tax Rate, Software Subs, Agency Fees)
 - Result badges (GREEN LIGHT/RED FLAG) no longer have hover effects
 - localStorage key updated to "true-rate-calculator-state"
+- Tooltips converted to click/tap popovers for mobile-friendly UX
+- Tax Rate minimum changed to 0 (was 1)
+- Placeholders for Deal Amount, Estimated Hours, Tax Rate updated to "0"
+- Added legal disclaimer in footer above "Built by Playbook Media" links
 
 ## User Preferences
 
