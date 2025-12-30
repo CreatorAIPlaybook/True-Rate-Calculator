@@ -551,7 +551,11 @@ creatoraiplaybook.co`;
                     data-testid="button-lock-deal"
                     asChild
                   >
-                    <a href="#">
+                      <a 
+                        href="https://www.hellobonsai.com/contract-template/freelance" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                      >
                       Lock in this deal with a contract
                       <ArrowRight className="w-4 h-4" />
                     </a>
