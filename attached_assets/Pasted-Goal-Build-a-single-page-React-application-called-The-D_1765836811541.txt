@@ -72,7 +72,7 @@ Top Section: The Input Cards.
 
 Bottom Sticky (or Fixed) Section: The Result Card (Update in real-time).
 
-Footer: "Built by Playbook Media."
+Footer: "Built by Udaller."
 
 Specific Features:
 

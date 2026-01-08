@@ -467,7 +467,7 @@ creatoraiplaybook.co`;
                 className="text-slate-500 hover:text-slate-700 transition-colors font-medium"
                 data-testid="link-playbook-media"
               >
-                Playbook Media
+                Udaller
               </a>
               . Get the full system at{" "}
               <a 
@@ -601,7 +601,7 @@ creatoraiplaybook.co`;
             className="text-slate-500 hover:text-slate-700 transition-colors"
             data-testid="link-playbook-media"
           >
-            Playbook Media
+            Udaller
           </a>
           . Get the full system at{" "}
           <a 

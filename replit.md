@@ -14,7 +14,7 @@ A single-page React application designed for solopreneurs to calculate whether f
 - Tooltips converted to click/tap popovers for mobile-friendly UX
 - Tax Rate minimum changed to 0 (was 1)
 - Placeholders for Deal Amount, Estimated Hours, Tax Rate updated to "0"
-- Added legal disclaimer in footer above "Built by Playbook Media" links
+- Added legal disclaimer in footer above "Built by Udaller" links
 
 ## User Preferences
 

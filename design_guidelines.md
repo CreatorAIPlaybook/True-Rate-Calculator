@@ -56,7 +56,7 @@
 - CTA Button: "Lock in this deal with a contract" in primary blue color
 
 **Footer:**
-- Minimal footer with "Built by Playbook Media" text
+- Minimal footer with "Built by Udaller" text
 - Muted text color (`text-slate-400`)
 
 ### E. Interaction States
