@@ -388,7 +388,7 @@ creatoraiplaybook.co`;
                             value={inputs.agencyFees || ""}
                             onChange={handleInputChange("agencyFees")}
                             className="pl-8 h-11 rounded-lg bg-[#0F1115] border-white/10 text-white font-mono focus:ring-2 focus:ring-[#F4C430]/50 focus:border-[#F4C430]"
-                            placeholder="e.g. Upwork (10%), Agent (15%)"
+                            placeholder="0"
                             data-testid="input-agency-fees"
                           />
                         </div>
