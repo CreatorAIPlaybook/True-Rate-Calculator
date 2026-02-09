@@ -17,17 +17,15 @@ import {
   CheckCircle2,
   XCircle,
   ArrowRight,
-  Zap,
-  Search,
   CreditCard,
   Users,
   Lock,
   Info,
   Copy,
-  Check
+  Check,
+  ChevronDown,
+  ChevronUp
 } from "lucide-react";
-
-type ScenarioMode = "quick" | "deep";
 
 interface DealInputs {
   dealAmount: number;
@@ -47,7 +45,7 @@ interface Calculations {
 }
 
 interface StoredState {
-  scenarioMode: ScenarioMode;
+  showAdvancedCosts: boolean;
   minimumFloor: number;
   inputs: DealInputs;
 }
@@ -68,7 +66,12 @@ function loadStoredState(): StoredState | null {
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) {
-      return JSON.parse(stored);
+      const parsed = JSON.parse(stored);
+      if ("scenarioMode" in parsed) {
+        parsed.showAdvancedCosts = parsed.scenarioMode === "deep";
+        delete parsed.scenarioMode;
+      }
+      return parsed;
     }
   } catch (e) {
     console.error("Failed to load stored state:", e);
@@ -126,17 +129,17 @@ export default function Home() {
   const [copied, setCopied] = useState(false);
   
   const storedState = loadStoredState();
-  const [scenarioMode, setScenarioMode] = useState<ScenarioMode>(storedState?.scenarioMode || "quick");
+  const [showAdvancedCosts, setShowAdvancedCosts] = useState(storedState?.showAdvancedCosts || false);
   const [minimumFloor, setMinimumFloor] = useState(storedState?.minimumFloor || 100);
   const [inputs, setInputs] = useState<DealInputs>(storedState?.inputs || defaultInputs);
 
   useEffect(() => {
-    saveState({ scenarioMode, minimumFloor, inputs });
-  }, [scenarioMode, minimumFloor, inputs]);
+    saveState({ showAdvancedCosts, minimumFloor, inputs });
+  }, [showAdvancedCosts, minimumFloor, inputs]);
 
   const calculations = useMemo<Calculations>(() => {
     const totalExpenses = inputs.expenses + 
-      (scenarioMode === "deep" ? inputs.softwareCosts + inputs.agencyFees : 0);
+      (showAdvancedCosts ? inputs.softwareCosts + inputs.agencyFees : 0);
     const taxAmount = inputs.dealAmount * (inputs.taxRate / 100);
     const netRevenue = inputs.dealAmount - totalExpenses - taxAmount;
     const totalHours = inputs.estimatedHours + (inputs.revisions * 2);
@@ -144,7 +147,7 @@ export default function Home() {
     const isApproved = effectiveRate >= minimumFloor;
 
     return { netRevenue, totalHours, effectiveRate, isApproved };
-  }, [inputs, minimumFloor, scenarioMode]);
+  }, [inputs, minimumFloor, showAdvancedCosts]);
 
   const updateInput = (field: keyof DealInputs, value: number) => {
     setInputs(prev => ({ ...prev, [field]: value }));
@@ -155,11 +158,13 @@ export default function Home() {
     updateInput(field, value);
   };
 
-  const handleModeChange = (mode: ScenarioMode) => {
-    setScenarioMode(mode);
-    if (mode === "quick") {
-      setInputs(prev => ({ ...prev, softwareCosts: 0, agencyFees: 0 }));
-    }
+  const toggleAdvancedCosts = () => {
+    setShowAdvancedCosts(prev => {
+      if (prev) {
+        setInputs(current => ({ ...current, softwareCosts: 0, agencyFees: 0 }));
+      }
+      return !prev;
+    });
   };
 
   const handleCopySummary = async () => {
@@ -215,35 +220,6 @@ creatoraiplaybook.co`;
       </header>
 
       <main className="flex-1 w-full max-w-2xl mx-auto px-4 py-6 pb-40">
-        <div className="mb-6 flex justify-center">
-          <div className="inline-flex items-center bg-[#0F1115] rounded-lg p-1 border border-white/10">
-            <button
-              onClick={() => handleModeChange("quick")}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                scenarioMode === "quick"
-                  ? "bg-[#F4C430] text-[#0F1115] font-bold shadow-sm"
-                  : "text-gray-400 hover:text-white"
-              }`}
-              data-testid="button-quick-check"
-            >
-              <Zap className="w-4 h-4" />
-              Quick Check
-            </button>
-            <button
-              onClick={() => handleModeChange("deep")}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                scenarioMode === "deep"
-                  ? "bg-[#F4C430] text-[#0F1115] font-bold shadow-sm"
-                  : "text-gray-400 hover:text-white"
-              }`}
-              data-testid="button-deep-dive"
-            >
-              <Search className="w-4 h-4" />
-              Deep Dive
-            </button>
-          </div>
-        </div>
-
         <div className="space-y-6">
           <Card className="bg-[#161B22] rounded-xl border border-white/10 shadow-none overflow-visible">
             <div className="p-6">
@@ -359,15 +335,26 @@ creatoraiplaybook.co`;
                   </div>
                 </div>
 
-                {scenarioMode === "deep" && (
-                  <div className="pt-4 border-t border-white/10">
-                    <div className="flex items-center gap-2 mb-4">
-                      <Badge variant="secondary" className="text-xs bg-white/5 text-[#F4C430] border border-[#F4C430]/20 no-default-hover-elevate no-default-active-elevate cursor-default">
-                        Deep Dive
-                      </Badge>
-                      <span className="text-xs text-gray-500">Additional costs</span>
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
+                <div className="pt-4 border-t border-white/10">
+                  <button
+                    type="button"
+                    onClick={toggleAdvancedCosts}
+                    className="flex items-center justify-between w-full py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors"
+                    data-testid="button-toggle-advanced"
+                  >
+                    <span className="flex items-center gap-2">
+                      <CreditCard className="w-4 h-4 text-gray-500" />
+                      Add Advanced Costs (Software & Agency Fees)
+                    </span>
+                    {showAdvancedCosts ? (
+                      <ChevronUp className="w-4 h-4 text-gray-500" />
+                    ) : (
+                      <ChevronDown className="w-4 h-4 text-gray-500" />
+                    )}
+                  </button>
+
+                  {showAdvancedCosts && (
+                    <div className="mt-4 grid grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="softwareCosts" className="text-sm font-medium text-gray-300 flex items-center gap-2">
                           Software Subs
@@ -407,8 +394,8 @@ creatoraiplaybook.co`;
                         </div>
                       </div>
                     </div>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             </div>
           </Card>
@@ -550,7 +537,7 @@ creatoraiplaybook.co`;
                     data-testid="button-lock-deal"
                     asChild
                   >
-                    <a href="#">
+                    <a href="https://www.honeybook.com" target="_blank" rel="noopener noreferrer">
                       Lock in this deal with a contract
                       <ArrowRight className="w-4 h-4" />
                     </a>

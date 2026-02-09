@@ -84,7 +84,8 @@ The deal margin calculation involves:
 1. **Inputs**: Deal amount, estimated hours, revisions (each adds 2 hours), expenses, tax rate
 2. **Standards**: Minimum hourly floor (default $100/hr)
 3. **Calculations**: Net Revenue = Deal Amount - Expenses - (Deal Amount × Tax Rate / 100)
-4. **Modes**: "Quick Check" (basic) vs "Deep Dive" (includes software subscriptions, agency fees)
+4. **Advanced Costs**: Collapsible "Add Advanced Costs" toggle reveals Software Subs and Agency Fees inputs; collapsed by default, resets to 0 when collapsed
+5. **Lock In CTA**: Links to HoneyBook (honeybook.com) for contract creation
 
 ## External Dependencies
 
