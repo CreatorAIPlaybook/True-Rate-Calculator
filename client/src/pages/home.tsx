@@ -219,7 +219,7 @@ creatoraiplaybook.co`;
         </div>
       </header>
 
-      <main className="flex-1 w-full max-w-2xl mx-auto px-4 py-6" style={{ paddingBottom: '200px' }}>
+      <main className="flex-1 w-full max-w-2xl mx-auto px-4 py-6">
         <div className="space-y-6">
           <Card className="bg-[#161B22] rounded-xl border border-white/10 shadow-none overflow-visible">
             <div className="p-6">
@@ -377,7 +377,7 @@ creatoraiplaybook.co`;
                       <div className="space-y-2">
                         <Label htmlFor="agencyFees" className="text-sm font-medium text-gray-300 flex items-center gap-2">
                           <Users className="w-4 h-4 text-gray-500" />
-                          Agency Fees
+                          Platform / Agency Fees
                           <InfoTooltip content="Fees taken by platforms (Upwork/Fiverr) or commissions paid to an agent." />
                         </Label>
                         <div className="relative">
@@ -388,7 +388,7 @@ creatoraiplaybook.co`;
                             value={inputs.agencyFees || ""}
                             onChange={handleInputChange("agencyFees")}
                             className="pl-8 h-11 rounded-lg bg-[#0F1115] border-white/10 text-white font-mono focus:ring-2 focus:ring-[#F4C430]/50 focus:border-[#F4C430]"
-                            placeholder="0"
+                            placeholder="e.g. Upwork (10%), Agent (15%)"
                             data-testid="input-agency-fees"
                           />
                         </div>
@@ -467,6 +467,7 @@ creatoraiplaybook.co`;
               </a>
             </p>
           </div>
+          <div className="h-48 w-full shrink-0" aria-hidden="true" />
         </div>
       </main>
 
