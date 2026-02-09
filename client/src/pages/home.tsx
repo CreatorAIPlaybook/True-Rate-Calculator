@@ -219,7 +219,7 @@ creatoraiplaybook.co`;
         </div>
       </header>
 
-      <main className="flex-1 w-full max-w-2xl mx-auto px-4 py-6 pb-40">
+      <main className="flex-1 w-full max-w-2xl mx-auto px-4 py-6" style={{ paddingBottom: '200px' }}>
         <div className="space-y-6">
           <Card className="bg-[#161B22] rounded-xl border border-white/10 shadow-none overflow-visible">
             <div className="p-6">
