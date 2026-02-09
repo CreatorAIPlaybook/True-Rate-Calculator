@@ -108,7 +108,7 @@ function InfoTooltip({ content }: { content: string }) {
       <PopoverTrigger asChild>
         <button 
           type="button" 
-          className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-slate-200 text-slate-500 hover:bg-slate-300 transition-colors"
+          className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-white/10 text-gray-400 hover:bg-white/20 transition-colors"
           data-testid="button-info-tooltip"
         >
           <Info className="w-3 h-3" />
@@ -196,33 +196,33 @@ creatoraiplaybook.co`;
   };
 
   return (
-    <div className="min-h-screen bg-slate-100 flex flex-col">
-      <header className="w-full bg-slate-100 pt-6 pb-4">
+    <div className="min-h-screen bg-[#0F1115] flex flex-col">
+      <header className="w-full bg-[#0F1115] pt-6 pb-4">
         <div className="max-w-2xl mx-auto px-4">
           <div className="flex items-center justify-center gap-1.5 mb-4">
-            <Lock className="w-3.5 h-3.5 text-slate-400" />
-            <span className="text-sm text-slate-400" data-testid="text-privacy-notice">
+            <Lock className="w-3.5 h-3.5 text-gray-500" />
+            <span className="text-sm text-gray-500" data-testid="text-privacy-notice">
               100% Private - Stored Only on Your Device
             </span>
           </div>
           <div className="flex flex-col items-center text-center">
-            <h1 className="text-2xl md:text-3xl font-bold text-slate-900 mb-2" data-testid="text-app-title">
+            <h1 className="text-2xl md:text-3xl font-bold text-white mb-2" data-testid="text-app-title">
               True Rate Calculator
             </h1>
-            <p className="text-sm text-slate-500">Calculate your effective hourly rate on sponsorship deals</p>
+            <p className="text-sm text-gray-400">Calculate your effective hourly rate on sponsorship deals</p>
           </div>
         </div>
       </header>
 
       <main className="flex-1 w-full max-w-2xl mx-auto px-4 py-6 pb-40">
         <div className="mb-6 flex justify-center">
-          <div className="inline-flex items-center bg-white rounded-lg p-1 border border-slate-200 shadow-sm">
+          <div className="inline-flex items-center bg-[#0F1115] rounded-lg p-1 border border-white/10">
             <button
               onClick={() => handleModeChange("quick")}
-              className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                 scenarioMode === "quick"
-                  ? "bg-slate-800 text-white shadow-sm"
-                  : "text-slate-600 hover:text-slate-900"
+                  ? "bg-[#F4C430] text-[#0F1115] font-bold shadow-sm"
+                  : "text-gray-400 hover:text-white"
               }`}
               data-testid="button-quick-check"
             >
@@ -231,10 +231,10 @@ creatoraiplaybook.co`;
             </button>
             <button
               onClick={() => handleModeChange("deep")}
-              className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                 scenarioMode === "deep"
-                  ? "bg-slate-800 text-white shadow-sm"
-                  : "text-slate-600 hover:text-slate-900"
+                  ? "bg-[#F4C430] text-[#0F1115] font-bold shadow-sm"
+                  : "text-gray-400 hover:text-white"
               }`}
               data-testid="button-deep-dive"
             >
@@ -245,30 +245,30 @@ creatoraiplaybook.co`;
         </div>
 
         <div className="space-y-6">
-          <Card className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-visible">
+          <Card className="bg-[#161B22] rounded-xl border border-white/10 shadow-none overflow-visible">
             <div className="p-6">
               <div className="flex items-center gap-2 mb-6">
-                <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100 text-slate-600">
+                <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-white/5 text-gray-400">
                   <Receipt className="w-4 h-4" />
                 </div>
-                <h2 className="text-lg font-bold text-slate-900">The Deal</h2>
+                <h2 className="text-lg font-bold text-white">The Deal</h2>
               </div>
 
               <div className="grid gap-5">
                 <div className="space-y-2">
-                  <Label htmlFor="dealAmount" className="text-sm font-medium text-slate-700 flex items-center gap-2">
-                    <DollarSign className="w-4 h-4 text-slate-400" />
+                  <Label htmlFor="dealAmount" className="text-sm font-medium text-gray-300 flex items-center gap-2">
+                    <DollarSign className="w-4 h-4 text-gray-500" />
                     Deal Amount
                     <InfoTooltip content="The total amount the brand is paying you for this sponsorship deal before any deductions." />
                   </Label>
                   <div className="relative">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-medium">$</span>
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 font-medium font-mono">$</span>
                     <Input
                       id="dealAmount"
                       type="number"
                       value={inputs.dealAmount || ""}
                       onChange={handleInputChange("dealAmount")}
-                      className="pl-8 h-11 rounded-lg border-slate-300 focus:ring-2 focus:ring-slate-500 focus:border-slate-500 bg-slate-50"
+                      className="pl-8 h-11 rounded-lg bg-[#0F1115] border-white/10 text-white font-mono focus:ring-2 focus:ring-[#F4C430]/50 focus:border-[#F4C430]"
                       placeholder="0"
                       data-testid="input-deal-amount"
                     />
@@ -277,8 +277,8 @@ creatoraiplaybook.co`;
 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="estimatedHours" className="text-sm font-medium text-slate-700 flex items-center gap-2">
-                      <Clock className="w-4 h-4 text-slate-400" />
+                    <Label htmlFor="estimatedHours" className="text-sm font-medium text-gray-300 flex items-center gap-2">
+                      <Clock className="w-4 h-4 text-gray-500" />
                       Estimated Hours
                       <InfoTooltip content="Total time you'll spend on this deal including filming, editing, communication, and admin work." />
                     </Label>
@@ -287,16 +287,16 @@ creatoraiplaybook.co`;
                       type="number"
                       value={inputs.estimatedHours || ""}
                       onChange={handleInputChange("estimatedHours")}
-                      className="h-11 rounded-lg border-slate-300 focus:ring-2 focus:ring-slate-500 focus:border-slate-500 bg-slate-50"
+                      className="h-11 rounded-lg bg-[#0F1115] border-white/10 text-white font-mono focus:ring-2 focus:ring-[#F4C430]/50 focus:border-[#F4C430]"
                       placeholder="0"
                       data-testid="input-estimated-hours"
                     />
-                    <p className="text-xs text-slate-400">Filming, editing, admin</p>
+                    <p className="text-xs text-gray-500">Filming, editing, admin</p>
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="revisions" className="text-sm font-medium text-slate-700 flex items-center gap-2">
-                      <RefreshCw className="w-4 h-4 text-slate-400" />
+                    <Label htmlFor="revisions" className="text-sm font-medium text-gray-300 flex items-center gap-2">
+                      <RefreshCw className="w-4 h-4 text-gray-500" />
                       Revisions
                       <InfoTooltip content="Number of revision rounds the brand may request. Each revision typically adds about 2 hours of work." />
                     </Label>
@@ -305,40 +305,40 @@ creatoraiplaybook.co`;
                       type="number"
                       value={inputs.revisions || ""}
                       onChange={handleInputChange("revisions")}
-                      className="h-11 rounded-lg border-slate-300 focus:ring-2 focus:ring-slate-500 focus:border-slate-500 bg-slate-50"
+                      className="h-11 rounded-lg bg-[#0F1115] border-white/10 text-white font-mono focus:ring-2 focus:ring-[#F4C430]/50 focus:border-[#F4C430]"
                       placeholder="0"
                       min="0"
                       data-testid="input-revisions"
                     />
-                    <p className="text-xs text-slate-400">+2 hours each</p>
+                    <p className="text-xs text-gray-500">+2 hours each</p>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="expenses" className="text-sm font-medium text-slate-700 flex items-center gap-2">
-                      <CreditCard className="w-4 h-4 text-slate-400" />
+                    <Label htmlFor="expenses" className="text-sm font-medium text-gray-300 flex items-center gap-2">
+                      <CreditCard className="w-4 h-4 text-gray-500" />
                       Expenses
                       <InfoTooltip content="One-off costs for this specific project (e.g., stock photos, contractor fees, specific fonts)." />
                     </Label>
                     <div className="relative">
-                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-medium">$</span>
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 font-medium font-mono">$</span>
                       <Input
                         id="expenses"
                         type="number"
                         value={inputs.expenses || ""}
                         onChange={handleInputChange("expenses")}
-                        className="pl-8 h-11 rounded-lg border-slate-300 focus:ring-2 focus:ring-slate-500 focus:border-slate-500 bg-slate-50"
+                        className="pl-8 h-11 rounded-lg bg-[#0F1115] border-white/10 text-white font-mono focus:ring-2 focus:ring-[#F4C430]/50 focus:border-[#F4C430]"
                         placeholder="0"
                         data-testid="input-expenses"
                       />
                     </div>
-                    <p className="text-xs text-slate-400">Props, contractors</p>
+                    <p className="text-xs text-gray-500">Props, contractors</p>
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="taxRate" className="text-sm font-medium text-slate-700 flex items-center gap-2">
-                      <Percent className="w-4 h-4 text-slate-400" />
+                    <Label htmlFor="taxRate" className="text-sm font-medium text-gray-300 flex items-center gap-2">
+                      <Percent className="w-4 h-4 text-gray-500" />
                       Tax Rate
                       <InfoTooltip content="The percentage set aside for taxes. A safe bet for freelancers is usually 25-30%." />
                     </Label>
@@ -348,39 +348,39 @@ creatoraiplaybook.co`;
                         type="number"
                         value={inputs.taxRate || ""}
                         onChange={handleInputChange("taxRate")}
-                        className="pr-8 h-11 rounded-lg border-slate-300 focus:ring-2 focus:ring-slate-500 focus:border-slate-500 bg-slate-50"
+                        className="pr-8 h-11 rounded-lg bg-[#0F1115] border-white/10 text-white font-mono focus:ring-2 focus:ring-[#F4C430]/50 focus:border-[#F4C430]"
                         placeholder="0"
                         min="0"
                         max="100"
                         data-testid="input-tax-rate"
                       />
-                      <span className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 font-medium">%</span>
+                      <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 font-medium font-mono">%</span>
                     </div>
                   </div>
                 </div>
 
                 {scenarioMode === "deep" && (
-                  <div className="pt-4 border-t border-slate-100">
+                  <div className="pt-4 border-t border-white/10">
                     <div className="flex items-center gap-2 mb-4">
-                      <Badge variant="secondary" className="text-xs bg-slate-100 text-slate-600 no-default-hover-elevate no-default-active-elevate cursor-default">
+                      <Badge variant="secondary" className="text-xs bg-white/5 text-[#F4C430] border border-[#F4C430]/20 no-default-hover-elevate no-default-active-elevate cursor-default">
                         Deep Dive
                       </Badge>
-                      <span className="text-xs text-slate-400">Additional costs</span>
+                      <span className="text-xs text-gray-500">Additional costs</span>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="softwareCosts" className="text-sm font-medium text-slate-700 flex items-center gap-2">
+                        <Label htmlFor="softwareCosts" className="text-sm font-medium text-gray-300 flex items-center gap-2">
                           Software Subs
                           <InfoTooltip content="Monthly tools you pay for to do the work (Adobe, ChatGPT, Hosting, etc.)." />
                         </Label>
                         <div className="relative">
-                          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-medium">$</span>
+                          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 font-medium font-mono">$</span>
                           <Input
                             id="softwareCosts"
                             type="number"
                             value={inputs.softwareCosts || ""}
                             onChange={handleInputChange("softwareCosts")}
-                            className="pl-8 h-11 rounded-lg border-slate-300 focus:ring-2 focus:ring-slate-500 focus:border-slate-500 bg-slate-50"
+                            className="pl-8 h-11 rounded-lg bg-[#0F1115] border-white/10 text-white font-mono focus:ring-2 focus:ring-[#F4C430]/50 focus:border-[#F4C430]"
                             placeholder="0"
                             data-testid="input-software-costs"
                           />
@@ -388,19 +388,19 @@ creatoraiplaybook.co`;
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="agencyFees" className="text-sm font-medium text-slate-700 flex items-center gap-2">
-                          <Users className="w-4 h-4 text-slate-400" />
+                        <Label htmlFor="agencyFees" className="text-sm font-medium text-gray-300 flex items-center gap-2">
+                          <Users className="w-4 h-4 text-gray-500" />
                           Agency Fees
                           <InfoTooltip content="Fees taken by platforms (Upwork/Fiverr) or commissions paid to an agent." />
                         </Label>
                         <div className="relative">
-                          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-medium">$</span>
+                          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 font-medium font-mono">$</span>
                           <Input
                             id="agencyFees"
                             type="number"
                             value={inputs.agencyFees || ""}
                             onChange={handleInputChange("agencyFees")}
-                            className="pl-8 h-11 rounded-lg border-slate-300 focus:ring-2 focus:ring-slate-500 focus:border-slate-500 bg-slate-50"
+                            className="pl-8 h-11 rounded-lg bg-[#0F1115] border-white/10 text-white font-mono focus:ring-2 focus:ring-[#F4C430]/50 focus:border-[#F4C430]"
                             placeholder="0"
                             data-testid="input-agency-fees"
                           />
@@ -413,25 +413,25 @@ creatoraiplaybook.co`;
             </div>
           </Card>
 
-          <Card className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-visible">
+          <Card className="bg-[#161B22] rounded-xl border border-white/10 shadow-none overflow-visible">
             <div className="p-6">
               <div className="flex items-center gap-2 mb-6">
-                <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-slate-100 text-slate-600">
+                <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-white/5 text-gray-400">
                   <Target className="w-4 h-4" />
                 </div>
-                <h2 className="text-lg font-bold text-slate-900">Your Standards</h2>
+                <h2 className="text-lg font-bold text-white">Your Standards</h2>
               </div>
 
               <div className="space-y-4">
                 <div className="flex items-center justify-between flex-wrap gap-2">
-                  <Label className="text-sm font-medium text-slate-700">
+                  <Label className="text-sm font-medium text-gray-300">
                     Minimum Hourly Floor
                   </Label>
                   <div className="flex items-center gap-2">
-                    <span className="text-2xl font-bold text-slate-900" data-testid="text-minimum-floor">
+                    <span className="text-2xl font-bold text-white font-mono" data-testid="text-minimum-floor">
                       {formatCurrency(minimumFloor)}
                     </span>
-                    <span className="text-sm text-slate-400">/hr</span>
+                    <span className="text-sm text-gray-500 font-mono">/hr</span>
                   </div>
                 </div>
 
@@ -445,7 +445,7 @@ creatoraiplaybook.co`;
                   data-testid="slider-minimum-floor"
                 />
 
-                <div className="flex justify-between text-xs text-slate-400">
+                <div className="flex justify-between text-xs text-gray-500 font-mono">
                   <span>$25/hr</span>
                   <span>$500/hr</span>
                 </div>
@@ -453,18 +453,17 @@ creatoraiplaybook.co`;
             </div>
           </Card>
 
-          {/* FOOTER TEXT - PLACED BELOW THE CARD */}
           <div className="px-4 text-center space-y-3 pb-8">
-            <p className="text-xs text-slate-400 leading-relaxed" data-testid="text-disclaimer">
+            <p className="text-xs text-gray-600 leading-relaxed" data-testid="text-disclaimer">
               This calculator provides estimates for informational purposes only and should not be considered financial or tax advice. Consult a qualified professional for your specific situation.
             </p>
-            <p className="text-sm text-slate-400" data-testid="text-footer">
+            <p className="text-sm text-gray-600" data-testid="text-footer">
               Built by{" "}
               <a 
                 href="https://creatoraiplaybook.co" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-slate-500 hover:text-slate-700 transition-colors font-medium"
+                className="text-gray-400 hover:text-[#F4C430] transition-colors font-medium"
                 data-testid="link-playbook-media"
               >
                 Udaller
@@ -474,7 +473,7 @@ creatoraiplaybook.co`;
                 href="https://creatoraiplaybook.co" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="text-slate-500 hover:text-slate-700 transition-colors font-medium"
+                className="text-gray-400 hover:text-[#F4C430] transition-colors font-medium"
                 data-testid="link-creator-playbook"
               >
                 creatoraiplaybook.co
@@ -484,13 +483,13 @@ creatoraiplaybook.co`;
         </div>
       </main>
 
-      <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-slate-200 shadow-lg z-50">
+      <div className="fixed bottom-0 left-0 right-0 bg-[#161B22]/95 backdrop-blur-sm border-t border-white/10 shadow-lg z-50">
         <div className="max-w-2xl mx-auto px-4 py-4">
           <Card 
-            className={`rounded-xl border-2 transition-all duration-300 overflow-visible ${
+            className={`rounded-xl border transition-all duration-300 overflow-visible shadow-none ${
               calculations.isApproved 
-                ? "bg-emerald-50 border-emerald-200" 
-                : "bg-red-50 border-red-200"
+                ? "bg-emerald-950/40 border-emerald-500/20" 
+                : "bg-red-950/40 border-red-500/20"
             }`}
           >
             <div className="p-4 md:p-6">
@@ -498,8 +497,8 @@ creatoraiplaybook.co`;
                 <div className="flex items-center gap-4">
                   <div className={`flex items-center justify-center w-12 h-12 rounded-full ${
                     calculations.isApproved 
-                      ? "bg-emerald-100 text-emerald-600" 
-                      : "bg-red-100 text-red-600"
+                      ? "bg-emerald-500/10 text-emerald-400" 
+                      : "bg-red-500/10 text-red-400"
                   }`}>
                     {calculations.isApproved 
                       ? <CheckCircle2 className="w-6 h-6" />
@@ -509,14 +508,14 @@ creatoraiplaybook.co`;
                   <div>
                     <div className="flex items-center gap-2">
                       <p className={`text-xs font-medium uppercase tracking-wide ${
-                        calculations.isApproved ? "text-emerald-600" : "text-red-600"
+                        calculations.isApproved ? "text-emerald-400" : "text-red-400"
                       }`}>
                         Effective Hourly Rate
                       </p>
                       <InfoTooltip content="Your true earnings per hour after deducting taxes and expenses from the deal amount." />
                     </div>
-                    <p className={`text-3xl md:text-4xl font-bold ${
-                      calculations.isApproved ? "text-emerald-700" : "text-red-700"
+                    <p className={`text-3xl md:text-4xl font-bold font-mono ${
+                      calculations.isApproved ? "text-emerald-400" : "text-red-400"
                     }`} data-testid="text-effective-rate">
                       {formatCurrencyWithCents(calculations.effectiveRate)}
                       <span className="text-lg font-normal opacity-70">/hr</span>
@@ -527,10 +526,10 @@ creatoraiplaybook.co`;
                 <div className="flex flex-col gap-3">
                   <div className="flex items-center gap-2">
                     <span 
-                      className={`flex-1 inline-flex justify-center py-1.5 px-4 text-sm font-semibold rounded-md cursor-default select-none ${
+                      className={`flex-1 inline-flex justify-center py-1.5 px-4 text-sm font-semibold rounded-lg cursor-default select-none ${
                         calculations.isApproved 
-                          ? "bg-emerald-600 text-white" 
-                          : "bg-red-600 text-white"
+                          ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30" 
+                          : "bg-red-500/20 text-red-400 border border-red-500/30"
                       }`}
                       data-testid="badge-deal-status"
                     >
@@ -540,22 +539,18 @@ creatoraiplaybook.co`;
                       size="icon"
                       variant="outline"
                       onClick={handleCopySummary}
-                      className="shrink-0"
+                      className="shrink-0 border-white/20 text-white hover:bg-white/5"
                       data-testid="button-copy-summary"
                     >
-                      {copied ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4" />}
+                      {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
                     </Button>
                   </div>
                   <Button 
-                    className="bg-slate-800 hover:bg-slate-900 text-white gap-2"
+                    className="bg-[#F4C430] hover:bg-[#D4A017] text-[#0F1115] font-bold gap-2 rounded-lg"
                     data-testid="button-lock-deal"
                     asChild
                   >
-                      <a 
-                        href="https://www.hellobonsai.com/contract-template/freelance" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                      >
+                    <a href="#">
                       Lock in this deal with a contract
                       <ArrowRight className="w-4 h-4" />
                     </a>
@@ -563,22 +558,22 @@ creatoraiplaybook.co`;
                 </div>
               </div>
 
-              <div className="mt-4 pt-4 border-t border-slate-200/50 grid grid-cols-3 gap-4 text-center">
+              <div className="mt-4 pt-4 border-t border-white/10 grid grid-cols-3 gap-4 text-center">
                 <div>
-                  <p className="text-xs text-slate-500">Net Revenue</p>
-                  <p className="text-sm font-semibold text-slate-700" data-testid="text-net-revenue">
+                  <p className="text-xs text-gray-500">Net Revenue</p>
+                  <p className="text-sm font-semibold text-white font-mono" data-testid="text-net-revenue">
                     {formatCurrency(calculations.netRevenue)}
                   </p>
                 </div>
                 <div>
-                  <p className="text-xs text-slate-500">Total Hours</p>
-                  <p className="text-sm font-semibold text-slate-700" data-testid="text-total-hours">
+                  <p className="text-xs text-gray-500">Total Hours</p>
+                  <p className="text-sm font-semibold text-white font-mono" data-testid="text-total-hours">
                     {calculations.totalHours}h
                   </p>
                 </div>
                 <div>
-                  <p className="text-xs text-slate-500">Your Floor</p>
-                  <p className="text-sm font-semibold text-slate-700" data-testid="text-floor-comparison">
+                  <p className="text-xs text-gray-500">Your Floor</p>
+                  <p className="text-sm font-semibold text-white font-mono" data-testid="text-floor-comparison">
                     {formatCurrency(minimumFloor)}/hr
                   </p>
                 </div>
@@ -587,34 +582,6 @@ creatoraiplaybook.co`;
           </Card>
         </div>
       </div>
-
-      <footer className="w-full text-center py-4 bg-slate-100 space-y-2">
-        <p className="text-xs text-slate-400 px-4 max-w-xl mx-auto" data-testid="text-disclaimer">
-          This calculator provides estimates for informational purposes only and should not be considered financial or tax advice. Consult a qualified professional for your specific situation.
-        </p>
-        <p className="text-sm text-slate-400 px-4" data-testid="text-footer">
-          Built by{" "}
-          <a 
-            href="https://creatoraiplaybook.co" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-slate-500 hover:text-slate-700 transition-colors"
-            data-testid="link-playbook-media"
-          >
-            Udaller
-          </a>
-          . Get the full system at{" "}
-          <a 
-            href="https://creatoraiplaybook.co" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-slate-500 hover:text-slate-700 transition-colors"
-            data-testid="link-creator-playbook"
-          >
-            creatoraiplaybook.co
-          </a>
-        </p>
-      </footer>
     </div>
   );
 }

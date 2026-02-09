@@ -7,7 +7,15 @@ A single-page React application designed for solopreneurs to calculate whether f
 ## Recent Changes
 - Renamed app from "Deal Margin Simulator" to "True Rate Calculator"
 - Header is now non-sticky (scrolls with page) for more screen space
-- Styling updated to match Tax Shield brand (slate-100 background, slate-800 buttons)
+- RESKIN: Applied "Udaller One" Obsidian Design System (dark theme)
+  - Background: #0F1115, Cards: #161B22, Borders: white/10
+  - Primary buttons: Gold #F4C430 with dark text, font-bold
+  - Secondary buttons: border-white/20, text-white
+  - Inputs: dark bg (#0F1115) with white/10 borders, white text
+  - Typography: JetBrains Mono (font-mono) on all numbers/currency/percentages
+  - Labels remain Inter (font-sans)
+  - Green text for profit indicators only, gold for action buttons
+  - Footer links hover to gold; Slider uses gold (primary) via CSS variables
 - Added tooltips to all financial inputs (Expenses, Tax Rate, Software Subs, Agency Fees)
 - Result badges (GREEN LIGHT/RED FLAG) no longer have hover effects
 - localStorage key updated to "true-rate-calculator-state"
@@ -15,6 +23,7 @@ A single-page React application designed for solopreneurs to calculate whether f
 - Tax Rate minimum changed to 0 (was 1)
 - Placeholders for Deal Amount, Estimated Hours, Tax Rate updated to "0"
 - Added legal disclaimer in footer above "Built by Udaller" links
+- Footer is static (not sticky), only result bar is fixed at bottom
 
 ## User Preferences
 
@@ -26,17 +35,20 @@ Preferred communication style: Simple, everyday language.
 - **Framework**: React with TypeScript, built using Vite
 - **Routing**: Wouter (lightweight React router)
 - **State Management**: React Query (@tanstack/react-query) for server state, React useState for local form state
-- **Styling**: Tailwind CSS with a custom FinTech design system
+- **Styling**: Tailwind CSS with "Udaller One" Obsidian Design System
 - **Component Library**: shadcn/ui components (Radix UI primitives + custom styling)
 - **Icons**: Lucide React
 
 ### Design System
-The application follows a "Clean FinTech" aesthetic:
-- Background: Soft gray (slate-50), never pure white or dark mode
-- Cards: White with rounded corners, subtle shadows, slate borders
-- Primary action color: Blue-600
-- Typography: System sans-serif (Inter style)
-- Result states: Green for approved deals, Red for rejected deals
+The application follows the "Udaller One" Obsidian dark aesthetic:
+- Background: #0F1115 (deep dark blue-gray)
+- Cards/Containers: #161B22 with border-white/10
+- Primary action color: Gold #F4C430 with dark text (#0F1115), font-bold
+- Secondary buttons: border-white/20, text-white
+- Inputs: bg-[#0F1115] border-white/10 text-white
+- Typography: Inter (font-sans) for labels, JetBrains Mono (font-mono) for all numbers/currency/percentages
+- Result states: Green text for profit indicators, Red text for rejection (no green buttons)
+- Footer links hover to gold
 
 ### Backend Architecture
 - **Runtime**: Node.js with Express
