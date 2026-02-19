@@ -202,25 +202,22 @@ creatoraiplaybook.co`;
 
   return (
     <div className="min-h-screen bg-[#0F1115] flex flex-col">
-      <header className="w-full bg-[#0F1115] pt-6 pb-4">
-        <div className="max-w-2xl mx-auto px-4">
-          <div className="flex items-center justify-center gap-1.5 mb-4">
-            <Lock className="w-3.5 h-3.5 text-gray-500" />
-            <span className="text-sm text-gray-500" data-testid="text-privacy-notice">
-              100% Private - Stored Only on Your Device
-            </span>
-          </div>
-          <div className="flex flex-col items-center text-center">
-            <h1 className="text-2xl md:text-3xl font-bold text-white mb-2" data-testid="text-app-title">
-              True Rate Calculator
-            </h1>
-            <p className="text-sm text-gray-400">Calculate your effective hourly rate on sponsorship deals</p>
-          </div>
-        </div>
-      </header>
-
       <main className="flex-1 w-full max-w-2xl mx-auto px-4 py-6">
         <div className="space-y-6">
+          {/* Hero section */}
+          <section className="flex flex-col items-center" aria-label="Introduction">
+            <div className="text-sm text-gray-500 flex items-center justify-center gap-2 mb-4">
+              <Lock className="w-3.5 h-3.5 shrink-0" aria-hidden />
+              <span>100% Private - Stored Only on Your Device</span>
+            </div>
+            <h1 className="text-3xl font-bold text-white mb-3 text-center">
+              Calculate Your True Hourly Rate
+            </h1>
+            <p className="text-gray-400 text-center mb-6 max-w-2xl mx-auto">
+              Calculate your effective hourly rate on sponsorship deals and protect your profit margin.
+            </p>
+          </section>
+
           <Card className="bg-[#161B22] rounded-xl border border-white/10 shadow-none overflow-visible">
             <div className="p-6">
               <div className="flex items-center gap-2 mb-6">
@@ -440,31 +437,32 @@ creatoraiplaybook.co`;
             </div>
           </Card>
 
-          <div className="px-4 text-center space-y-3 pb-8">
+          <div className="px-4 text-center space-y-3 pb-28 md:pb-12">
             <p className="text-xs text-gray-600 leading-relaxed" data-testid="text-disclaimer">
               This calculator provides estimates for informational purposes only and should not be considered financial or tax advice. Consult a qualified professional for your specific situation.
             </p>
-            <p className="text-sm text-gray-600" data-testid="text-footer">
-              Built by{" "}
-              <a 
-                href="https://creatoraiplaybook.co" 
-                target="_blank" 
+            <p className="text-sm text-gray-500" data-testid="text-footer">
+              This tool is part of the{" "}
+              <a
+                href="https://udaller.one"
+                target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-[#F4C430] transition-colors font-medium"
+                className="font-semibold text-gray-400 hover:text-[#F4C430] transition-colors"
                 data-testid="link-playbook-media"
               >
                 Udaller
               </a>
-              . Get the full system at{" "}
-              <a 
-                href="https://creatoraiplaybook.co" 
-                target="_blank" 
+              {" "}ecosystem. Build your machine at{" "}
+              <a
+                href="https://creatoraiplaybook.co"
+                target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-[#F4C430] transition-colors font-medium"
+                className="font-semibold text-gray-400 hover:text-[#F4C430] transition-colors"
                 data-testid="link-creator-playbook"
               >
-                creatoraiplaybook.co
+                Creator AI Playbook
               </a>
+              .
             </p>
           </div>
           <div className="h-48 w-full shrink-0" aria-hidden="true" />
