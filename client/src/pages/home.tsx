@@ -16,7 +16,7 @@ import {
   Target,
   CheckCircle2,
   XCircle,
-  ArrowRight,
+  ExternalLink,
   CreditCard,
   Users,
   Lock,
@@ -531,16 +531,16 @@ creatoraiplaybook.co`;
                       {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
                     </Button>
                   </div>
-                  <Button 
-                    className="bg-[#F4C430] hover:bg-[#D4A017] text-[#0F1115] font-bold gap-2 rounded-lg"
+                  <a
+                    href="https://udallerprotocol.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 rounded-lg px-8 py-3 text-base font-bold bg-[#F4C430] hover:bg-[#D4A017] text-[#0F1115] transition-colors w-full md:w-auto"
                     data-testid="button-lock-deal"
-                    asChild
                   >
-                    <a href="https://www.honeybook.com" target="_blank" rel="noopener noreferrer">
-                      Lock in this deal with a contract
-                      <ArrowRight className="w-4 h-4" />
-                    </a>
-                  </Button>
+                    Lock in this deal with a contract
+                    <ExternalLink className="h-5 w-5" />
+                  </a>
                 </div>
               </div>
 
