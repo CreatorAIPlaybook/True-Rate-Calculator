@@ -206,14 +206,14 @@ creatoraiplaybook.co`;
         <div className="space-y-6">
           {/* Hero section */}
           <section className="flex flex-col items-center" aria-label="Introduction">
-            <div className="text-sm text-gray-500 flex items-center justify-center gap-2 mb-4">
+            <div className="text-sm text-gray-500 mb-6 flex items-center justify-center gap-2">
               <Lock className="w-3.5 h-3.5 shrink-0" aria-hidden />
               <span>100% Private - Stored Only on Your Device</span>
             </div>
-            <h1 className="text-3xl font-bold text-white mb-3 text-center">
+            <h1 className="text-4xl font-bold text-white mb-4 tracking-tight text-center">
               Calculate Your True Hourly Rate
             </h1>
-            <p className="text-gray-400 text-center mb-6 max-w-2xl mx-auto">
+            <p className="text-sm text-gray-400 max-w-2xl mx-auto text-center">
               Calculate your effective hourly rate on sponsorship deals and protect your profit margin.
             </p>
           </section>
@@ -437,34 +437,34 @@ creatoraiplaybook.co`;
             </div>
           </Card>
 
-          <div className="px-4 text-center space-y-3 pb-28 md:pb-12">
-            <p className="text-xs text-gray-600 leading-relaxed" data-testid="text-disclaimer">
-              This calculator provides estimates for informational purposes only and should not be considered financial or tax advice. Consult a qualified professional for your specific situation.
+          <footer className="mt-16 pt-8 border-t border-white/5">
+            <p className="text-xs text-gray-600 text-center max-w-4xl mx-auto leading-relaxed mb-6">
+              This tool provides automated analysis based on standard patterns for informational purposes only. It is not a substitute for professional operational or legal counsel. Always review your agreements carefully or consult a qualified professional.
             </p>
-            <p className="text-sm text-gray-500" data-testid="text-footer">
+            <p className="text-xs text-gray-500 text-center" data-testid="text-footer">
               This tool is part of the{" "}
               <a
                 href="https://udaller.one"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-semibold text-gray-400 hover:text-[#F4C430] transition-colors"
+                className="font-bold text-gray-300 hover:text-[#F4C430] transition-colors"
                 data-testid="link-playbook-media"
               >
                 Udaller
               </a>
               {" "}ecosystem. Build your machine at{" "}
               <a
-                href="https://udallerprotocol.com/"
+                href="https://udallerprotocol.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-semibold text-gray-400 hover:text-[#F4C430] transition-colors"
+                className="font-bold text-gray-300 hover:text-[#F4C430] transition-colors"
                 data-testid="link-creator-playbook"
               >
                 The Udaller Protocol
               </a>
               .
             </p>
-          </div>
+          </footer>
           <div className="h-48 w-full shrink-0" aria-hidden="true" />
         </div>
       </main>
