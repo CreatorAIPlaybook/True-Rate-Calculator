@@ -535,10 +535,10 @@ creatoraiplaybook.co`;
                     href="https://udallerprotocol.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-lg px-8 py-3 text-base font-bold bg-[#F4C430] hover:bg-[#D4A017] text-[#0F1115] transition-colors w-full md:w-auto"
+                    className="inline-flex items-center justify-center gap-2 rounded-lg px-8 py-3 text-base font-bold bg-[#F4C430] hover:bg-[#D4A017] text-[#0F1115] transition-colors w-full md:w-auto whitespace-nowrap"
                     data-testid="button-lock-deal"
                   >
-                    Lock in this deal with a contract
+                    Secure This Rate
                     <ExternalLink className="h-5 w-5" />
                   </a>
                 </div>
