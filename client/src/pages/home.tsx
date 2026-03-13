@@ -439,7 +439,7 @@ creatoraiplaybook.co`;
 
           <footer className="mt-16 pt-8 border-t border-white/5">
             <p className="text-xs text-gray-600 text-center max-w-4xl mx-auto leading-relaxed mb-6">
-              This tool provides automated analysis based on standard patterns for informational purposes only. It is not a substitute for professional operational or legal counsel. Always review your agreements carefully or consult a qualified professional.
+              This calculator provides pricing estimates based on standard industry models for informational purposes only. It is not a substitute for professional financial or accounting counsel. Always verify your own margin requirements and consult a qualified professional before finalizing your rates.
             </p>
             <p className="text-xs text-gray-500 text-center" data-testid="text-footer">
               This tool is part of the{" "}
